@@ -411,6 +411,11 @@
               <FileType>1</FileType>
               <FilePath>.\src\lcd_spi.c</FilePath>
             </File>
+            <File>
+              <FileName>cv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\cv.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -440,6 +445,11 @@
               <FileName>lcd_spi.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\inc\lcd_spi.h</FilePath>
+            </File>
+            <File>
+              <FileName>cv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\cv.h</FilePath>
             </File>
           </Files>
         </Group>

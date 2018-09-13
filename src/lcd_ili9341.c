@@ -221,23 +221,89 @@ void LCD_ILI9341_Fill(uint16_t color) {
 
 void LCD_ILI9341_DisplayImage(uint16_t image[ILI9341_PIXEL]) {
 	uint32_t n, i, j;
-	
-	LCD_ILI9341_SetCursorPosition(0, 0, ILI9341_Opts.width - 1, ILI9341_Opts.height - 1);
+   uint8_t temp[4];
+   uint16_t b,g,r;
+   int h,s,v;
+   uint8_t MAX_color; // Blue 0, Green 1, Red 2
+   uint8_t min;
+	 uint16_t my_image;
+	 uint8_t flag;
+   LCD_ILI9341_SetCursorPosition(0, 0, ILI9341_Opts.width - 1, ILI9341_Opts.height - 1);
 
-	LCD_ILI9341_SendCommand(ILI9341_GRAM);
+   LCD_ILI9341_SendCommand(ILI9341_GRAM);
 
-	ILI9341_WRX_SET;
-	ILI9341_CS_RESET;
+   ILI9341_WRX_SET;
+   ILI9341_CS_RESET;
+   
+	 flag = 1;
 	
-	for (n = 0; n < ILI9341_PIXEL; n++) {
-		i = image[n] >> 8;
-		j = image[n] & 0xFF;
+	if(flag == 0)
+	{
+		 for (n = 0; n < ILI9341_PIXEL; n++) {
+				i = image[n] >> 8;
+				j = image[n] & 0xFF;
+			 
+				LCD_SPI_Send(ILI9341_SPI, i);
+				LCD_SPI_Send(ILI9341_SPI, j);
+		 }
+  }
+	 
+   /*
+   for (n = 0; n < ILI9341_PIXEL; n++) {
+		  my_image = 0;
+		  r = b = g = 0;
+		 
+      r = ( ( ( ( image[n] & 0xF800 ) >> 8 )  ) << 8 ) & 0xF800;
+      g = ( ( ( ( image[n] & 0x7E0 ) >> 3)  ) << 3 ) & 0x7E0;
+      b = ( ( ( ( image[n] & 0x1F) << 3 )  ) >> 3 ) & 0x1F;
+		  
+		  my_image = r | g | b;
+		 
+		  i = my_image >> 8;
+      j = my_image & 0xFF;
+		 
+      LCD_SPI_Send(ILI9341_SPI, i);
+      LCD_SPI_Send(ILI9341_SPI, j);
+   }
+	 */
+	 if(flag == 1)
+	 {
+		 for (n = 0; n < ILI9341_PIXEL; n++) {
+				r = ( image[n] & 0xF800 ) >> 8;
+				g = ( image[n] & 0x7E0 ) >> 3;
+				b = ( image[n] & 0x1F) << 3;
 				
-		LCD_SPI_Send(ILI9341_SPI, i);
-		LCD_SPI_Send(ILI9341_SPI, j);
-	}
-	
-	ILI9341_CS_SET;
+				v = r;
+				MAX_color = 2;
+				if(g > v) { v = g; MAX_color = 1; }
+				if(b > v) { v = b; MAX_color = 0; }
+				
+				min = r;
+				if(g < min) min = g;
+				if(b < min) min = b;
+				
+				if(v==0) s=0;
+				else s=255*(float)(v-min)/v;
+				switch(MAX_color)
+				{
+					 case 2 : h = 240 + (float)60 * (r - g) / (v - min); break;
+					 case 1 : h = 120 + (float)60 * (b - r) / (v - min); break;
+					 case 0 : h =       (float)60 * (g - b) / (v - min); break;
+					 default : h = 0;
+				}
+				if(h<0) h = h+360;
+				h = h/2;
+				if( ( 25 < h && h < 45 ) && 
+					( 65 < s && s < 255 ) &&
+					( 10 < v && v < 255) )
+						temp[0] = temp[1] = 255;
+				else temp[0] = temp[1] = 0;
+
+				LCD_SPI_Send(ILI9341_SPI, temp[0]);
+				LCD_SPI_Send(ILI9341_SPI, temp[1]);
+		 }
+   }
+   ILI9341_CS_SET;
 }
 
 void LCD_ILI9341_Delay(volatile unsigned int delay) {

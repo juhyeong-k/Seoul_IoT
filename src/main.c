@@ -59,7 +59,7 @@ int main(void){
 	LCD_ILI9341_DrawRectangle(99, 110, 221, 130, ILI9341_COLOR_WHITE);
 	
 	// OV7670 configuration
-	err = OV7670_init();
+	/*err = OV7670_init();
 	
 	if (err == true){
 		LCD_ILI9341_Puts(100, 165, "Failed", &LCD_Font_16x26, ILI9341_COLOR_RED, ILI9341_COLOR_BLACK);
@@ -70,7 +70,7 @@ int main(void){
 	else{
 		LCD_ILI9341_Puts(100, 165, "Success", &LCD_Font_16x26, ILI9341_COLOR_WHITE, ILI9341_COLOR_BLACK);
 	}
-	
+	*/
 	// LCD welcome page
 	LCD_ILI9341_Fill(ILI9341_COLOR_BLACK);
   LCD_ILI9341_Puts(60, 110, "MPOA project", &LCD_Font_16x26, ILI9341_COLOR_WHITE, ILI9341_COLOR_BLUE);
@@ -80,35 +80,9 @@ int main(void){
 	
 	// Infinite program loop
 	while(1){
-		if (btn_pressed == true){
-			if (STM_mode == 0){
-				// MODE 1 - RUN
-				STM_mode = 1;
-				STM_LedOff(LED_RED);
-				STM_LedOn(LED_GREEN);
-				
-				DCMI_CaptureCmd(ENABLE);
-			}
-			else{
-				if(frame_flag == false){
-					// MODE 2 - STOP
-					STM_mode = 0;
-					STM_LedOff(LED_GREEN);
-					STM_LedOn(LED_RED);
-					
-					DCMI_CaptureCmd(DISABLE);
-				}
-			}
-			btn_pressed = false;
-		}
-		
-		if( frame_flag == true){			
-			// Show camera image
+			DCMI_CaptureCmd(ENABLE);
 			LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
 			LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
-			
-			frame_flag = false;
-		}
 	}
 }
 

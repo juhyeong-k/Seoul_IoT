@@ -5,6 +5,7 @@
 ".\lcd_fonts.o"
 ".\lcd_ili9341.o"
 ".\lcd_spi.o"
+".\cv.o"
 ".\misc.o"
 ".\stm32f4xx_dcmi.o"
 ".\stm32f4xx_dma.o"
