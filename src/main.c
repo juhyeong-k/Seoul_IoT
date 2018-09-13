@@ -28,12 +28,15 @@
 #include "lcd_ili9341.h"
 #include "lcd_fonts.h"
 #include "lcd_spi.h"
+#include "cv.h"
 #include <stdbool.h>
 
 static volatile uint8_t STM_mode = 0;
 static volatile bool btn_pressed = false;
 static volatile bool sett_mode = true;
 static volatile bool frame_flag = false;
+
+uint16_t data_frame[4800];
 
 int main(void){
 	bool err;
@@ -81,6 +84,10 @@ int main(void){
 	// Infinite program loop
 	while(1){
 			DCMI_CaptureCmd(ENABLE);
+		
+		  get_yellow_line((uint16_t*) frame_buffer, data_frame);
+		  //LCD_ILI9341_Display_bit_Image(data_frame);
+		
 			LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
 			LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
 	}

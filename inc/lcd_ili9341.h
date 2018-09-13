@@ -31,6 +31,7 @@
 #include "stm32f4xx_gpio.h"
 #include "lcd_spi.h"
 #include "lcd_fonts.h"
+#include "OV7670_control.h"
 
 // SPI set
 #define ILI9341_SPI						SPI5
@@ -209,6 +210,7 @@ extern void LCD_ILI9341_Fill(uint16_t color);
 */
 extern void LCD_ILI9341_DisplayImage(uint16_t image[ILI9341_PIXEL]);
 
+void LCD_ILI9341_Display_bit_Image(uint16_t src[IMG_ROWS*IMG_COLUMNS/16]);
 /*
 * Rotate LCD
 * Select orientation

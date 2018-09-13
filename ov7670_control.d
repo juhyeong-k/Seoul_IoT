@@ -22,4 +22,6 @@
 .\ov7670_control.o: inc\lcd_ili9341.h
 .\ov7670_control.o: inc\lcd_spi.h
 .\ov7670_control.o: inc\lcd_fonts.h
+.\ov7670_control.o: inc\OV7670_control.h
+.\ov7670_control.o: inc\lcd_ili9341.h
 .\ov7670_control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

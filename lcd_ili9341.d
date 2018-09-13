@@ -21,3 +21,9 @@
 .\lcd_ili9341.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_dcmi.h
 .\lcd_ili9341.o: inc\lcd_spi.h
 .\lcd_ili9341.o: inc\lcd_fonts.h
+.\lcd_ili9341.o: inc\OV7670_control.h
+.\lcd_ili9341.o: inc\lcd_ili9341.h
+.\lcd_ili9341.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\lcd_ili9341.o: inc\OV7670_control.h
+.\lcd_ili9341.o: inc\cv.h
+.\lcd_ili9341.o: inc\OV7670_control.h

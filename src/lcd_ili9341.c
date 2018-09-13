@@ -23,6 +23,8 @@
 */
 
 #include "lcd_ili9341.h"
+#include "OV7670_control.h"
+#include "cv.h"
 
 uint16_t ILI9341_x;
 uint16_t ILI9341_y;
@@ -218,7 +220,37 @@ void LCD_ILI9341_Fill(uint16_t color) {
 		LCD_ILI9341_SendData(j);
 	}
 }
+void LCD_ILI9341_Display_bit_Image(uint16_t src[IMG_ROWS*IMG_COLUMNS/16])
+{
+	uint32_t n, i;
+	uint16_t bit = 0;
+	
+	LCD_ILI9341_SetCursorPosition(0, 0, ILI9341_Opts.width - 1, ILI9341_Opts.height - 1);
+  LCD_ILI9341_SendCommand(ILI9341_GRAM);
+  ILI9341_WRX_SET;
+  ILI9341_CS_RESET;
+	
+	for (n = 0; n < ILI9341_PIXEL/16; n++)
+	{
+		for(i=0; i < 16; i++)
+		{
+			bit_shift(&bit);
+			if(src[n] && bit)
+			{
+				LCD_SPI_Send(ILI9341_SPI, 255);
+				LCD_SPI_Send(ILI9341_SPI, 255);
+			}
+			else
+			{
+				LCD_SPI_Send(ILI9341_SPI, 0);
+				LCD_SPI_Send(ILI9341_SPI, 0);
+			}
+		}
 
+	}
+	
+  ILI9341_CS_SET;
+}
 void LCD_ILI9341_DisplayImage(uint16_t image[ILI9341_PIXEL]) {
 	uint32_t n, i, j;
    uint8_t temp[4];
