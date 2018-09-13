@@ -86,10 +86,11 @@ int main(void){
 			DCMI_CaptureCmd(ENABLE);
 		
 		  get_yellow_line((uint16_t*) frame_buffer, data_frame);
-		  //LCD_ILI9341_Display_bit_Image(data_frame);
 		
 			LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
-			LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
+		
+		  LCD_ILI9341_Display_bit_Image(data_frame);
+			//LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
 	}
 }
 

@@ -4,12 +4,13 @@
 void bit_shift(uint16_t* bit_origin)
 {
 	uint16_t bit = *bit_origin;
-	if(bit == 0)
+	if(bit == 0 | bit == 1)
 	{
-		bit = 1;
+		bit = 0x8000;
 		*bit_origin =  bit;
+		return;
 	}
-	bit = (bit << 15) | (bit >> 1);
+	bit = (bit >> 1);
 	*bit_origin = bit;
 }
 void get_yellow_line(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t des[IMG_ROWS*IMG_COLUMNS/16])

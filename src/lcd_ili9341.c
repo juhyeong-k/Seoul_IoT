@@ -235,7 +235,7 @@ void LCD_ILI9341_Display_bit_Image(uint16_t src[IMG_ROWS*IMG_COLUMNS/16])
 		for(i=0; i < 16; i++)
 		{
 			bit_shift(&bit);
-			if(src[n] && bit)
+			if(src[n] & bit)
 			{
 				LCD_SPI_Send(ILI9341_SPI, 255);
 				LCD_SPI_Send(ILI9341_SPI, 255);

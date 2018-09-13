@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\OptRec.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\OptRec.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Sep 14 04:32:33 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Sep 14 04:54:01 2018
 <BR><P>
 <H3>Maximum Stack Usage =        160 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -293,7 +293,7 @@ Global Symbols
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Init
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Fill
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_DrawRectangle
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_DisplayImage
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Display_bit_Image
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DCMI_DMA_init
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DCMI_CaptureCmd
 </UL>
@@ -454,13 +454,13 @@ Global Symbols
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 </UL>
-<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Display_bit_Image
+<BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_DisplayImage
 <LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_DrawPixel
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_SetCursorPosition
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_InitLCD
 <LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Rotate
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Fill
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_DisplayImage
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Display_bit_Image
 </UL>
 
 <P><STRONG><a name="[ba]"></a>LCD_ILI9341_Delay</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, lcd_ili9341.o(.text))
@@ -512,10 +512,10 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_SendData
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_SendCommand
 </UL>
-<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Display_bit_Image
+<BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_DisplayImage
 <LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_DrawPixel
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Fill
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_DisplayImage
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Display_bit_Image
 </UL>
 
 <P><STRONG><a name="[bd]"></a>LCD_ILI9341_DrawPixel</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, lcd_ili9341.o(.text))
@@ -541,25 +541,25 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[be]"></a>LCD_ILI9341_Display_bit_Image</STRONG> (Thumb, 140 bytes, Stack size 24 bytes, lcd_ili9341.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bit_shift
+<P><STRONG><a name="[8c]"></a>LCD_ILI9341_Display_bit_Image</STRONG> (Thumb, 140 bytes, Stack size 24 bytes, lcd_ili9341.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = LCD_ILI9341_Display_bit_Image &rArr; LCD_ILI9341_SetCursorPosition &rArr; LCD_ILI9341_SendData &rArr; LCD_SPI_Send
+</UL>
+<BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bit_shift
 <LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_SPI_Send
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_SetCursorPosition
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_SendCommand
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 </UL>
-
-<P><STRONG><a name="[8c]"></a>LCD_ILI9341_DisplayImage</STRONG> (Thumb, 534 bytes, Stack size 64 bytes, lcd_ili9341.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = LCD_ILI9341_DisplayImage &rArr; LCD_ILI9341_SetCursorPosition &rArr; LCD_ILI9341_SendData &rArr; LCD_SPI_Send
+<BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_SPI_Send
+
+<P><STRONG><a name="[bf]"></a>LCD_ILI9341_DisplayImage</STRONG> (Thumb, 534 bytes, Stack size 64 bytes, lcd_ili9341.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_SPI_Send
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_SetCursorPosition
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_SendCommand
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
-</UL>
-<BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[85]"></a>LCD_ILI9341_Rotate</STRONG> (Thumb, 96 bytes, Stack size 8 bytes, lcd_ili9341.o(.text))
@@ -643,10 +643,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_SPI_ReadMulti
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_SPI_WriteMulti
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_SPI_SendMulti
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Display_bit_Image
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_DisplayImage
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_SendData
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_SendCommand
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_DisplayImage
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Display_bit_Image
 </UL>
 
 <P><STRONG><a name="[c9]"></a>LCD_SPI_SendMulti</STRONG> (Thumb, 38 bytes, Stack size 24 bytes, lcd_spi.o(.text), UNUSED)
@@ -672,15 +672,15 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[bf]"></a>bit_shift</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, cv.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Display_bit_Image
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_yellow_line
+<P><STRONG><a name="[be]"></a>bit_shift</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, cv.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_yellow_line
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Display_bit_Image
 </UL>
 
-<P><STRONG><a name="[8b]"></a>get_yellow_line</STRONG> (Thumb, 414 bytes, Stack size 48 bytes, cv.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = get_yellow_line
+<P><STRONG><a name="[8b]"></a>get_yellow_line</STRONG> (Thumb, 432 bytes, Stack size 56 bytes, cv.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = get_yellow_line
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bit_shift
+<BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bit_shift
 </UL>
 <BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -826,21 +826,21 @@ Global Symbols
 <P><STRONG><a name="[12b]"></a>GPIO_ReadOutputData</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(.text), UNUSED)
 
 <P><STRONG><a name="[96]"></a>GPIO_SetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Display_bit_Image
+<BR><BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_DisplayImage
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_InitLCD
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_SendData
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_SendCommand
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;STM_LedOn
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Init
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_DisplayImage
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Display_bit_Image
 </UL>
 
 <P><STRONG><a name="[98]"></a>GPIO_ResetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Display_bit_Image
+<BR><BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_DisplayImage
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_SendData
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_SendCommand
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;STM_LedOff
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_DisplayImage
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_ILI9341_Display_bit_Image
 </UL>
 
 <P><STRONG><a name="[12c]"></a>GPIO_WriteBit</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(.text), UNUSED)
