@@ -39,7 +39,7 @@ static volatile bool frame_flag = false;
 
 uint16_t last_frame[4800];
 uint16_t current_frame[4800];
-//uint16_t temp_1[4800];
+uint16_t origin[4800];
 //uint16_t temp_2[4800];
 
 int main(void){
@@ -85,24 +85,26 @@ int main(void){
 	}		
 	else{
 		LCD_ILI9341_Puts(100, 165, "Success", &LCD_Font_16x26, ILI9341_COLOR_WHITE, ILI9341_COLOR_BLACK);
-	}*/
-	
+	}
+	*/
 	// LCD welcome page
 	LCD_ILI9341_Fill(ILI9341_COLOR_BLACK);
   LCD_ILI9341_Puts(60, 110, "MPOA project", &LCD_Font_16x26, ILI9341_COLOR_WHITE, ILI9341_COLOR_BLUE);
 	
 	// Increse SPI baudrate
 	LCD_SPI_BaudRateUp();
-	
 	// Infinite program loop
+	DCMI_CaptureCmd(ENABLE);
+	LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
+	LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
 	while(1){
 			DCMI_CaptureCmd(ENABLE);
 		  //get_yellow_line((uint16_t*) frame_buffer, current_frame);
-		  get_origin_yellow_line((uint16_t*) frame_buffer, last_frame, current_frame);
+		  get_origin_yellow_line((uint16_t*) frame_buffer, last_frame, current_frame, origin);
 		
 			LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
 		
-		  LCD_ILI9341_Display_bit_Image(current_frame);
+		  LCD_ILI9341_Display_bit_Image(origin);
 			//LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
 	}
 }

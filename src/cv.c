@@ -55,7 +55,7 @@ void get_yellow_line(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t des[IMG_ROWS*I
 				else des[n/16] &= ~bit;
 		 }
 }
-void get_origin_yellow_line(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t last_frame[IMG_ROWS*IMG_COLUMNS/16], uint16_t current_frame[IMG_ROWS*IMG_COLUMNS/16])
+void get_origin_yellow_line(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t last_frame[IMG_ROWS*IMG_COLUMNS/16], uint16_t current_frame[IMG_ROWS*IMG_COLUMNS/16], uint16_t des[IMG_ROWS*IMG_COLUMNS/16])
 {
 	int h,s,v;
 	uint16_t b,g,r;
@@ -92,15 +92,17 @@ void get_origin_yellow_line(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t last_fr
 		if(h<0) h = h+360;
 		h = h/2;
 		
+		
 		if( ( 25 < h && h < 95 ) && ( 65 < s && s < 255 ) && ( 10 < v && v < 255) )
-		{
-			if(last_frame[n/16] & bit)
-			  current_frame[n/16] |= bit;
-		  else current_frame[n/16] &= ~bit;
-		}
+		    current_frame[n/16] |= bit;
+		else current_frame[n/16] &= ~bit;
+		
+		if( (last_frame[n/16] & bit) && (current_frame[n/16] & bit) )
+			  des[n/16] |= bit;
+		
 	}
 	for(n = 0; n < ILI9341_PIXEL/16; n++)
 	{
-		//last_frame[n] = current_frame[n];
+		last_frame[n] = current_frame[n];
 	}
 }

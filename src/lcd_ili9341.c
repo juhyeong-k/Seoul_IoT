@@ -267,7 +267,7 @@ void LCD_ILI9341_DisplayImage(uint16_t image[ILI9341_PIXEL]) {
    ILI9341_WRX_SET;
    ILI9341_CS_RESET;
    
-	 flag = 1;
+	 flag = 0;
 	
 	if(flag == 0)
 	{
