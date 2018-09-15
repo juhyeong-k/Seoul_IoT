@@ -27,23 +27,15 @@ Project File Date:  09/15/2018
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'OptRec'
-compiling uart.c...
-inc\uart.h(5): warning:  #1-D: last line of file ends without a newline
-  void USART_Send(USART_TypeDef* USARTx, char data);
-src\uart.c(13): error:  #20: identifier "GPIO_InitStructure" is undefined
-  	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-src\uart.c(6): warning:  #177-D: variable "GPIO_InitStruct"  was declared but never referenced
-  	GPIO_InitTypeDef GPIO_InitStruct;
-src\uart.c(29): warning:  #1-D: last line of file ends without a newline
-  void USART_Send(USART_TypeDef* USARTx, char data);
-src\uart.c: 3 warnings, 1 error
 compiling main.c...
-inc\uart.h(5): warning:  #1-D: last line of file ends without a newline
-  void USART_Send(USART_TypeDef* USARTx, char data);
+src\main.c(116): warning:  #223-D: function "Delay" declared implicitly
+  	  	  Delay(2147483640);
 src\main.c(49): warning:  #177-D: variable "err"  was declared but never referenced
   	bool err;
 src\main.c: 2 warnings, 0 errors
-".\OptRec.axf" - 1 Error(s), 5 Warning(s).
+linking...
+Program Size: Code=19108 RO-data=704 RW-data=56 ZI-data=155232  
+".\OptRec.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -129,7 +121,6 @@ Package Vendor: Keil
    * Component: Keil::Device:StdPeriph Drivers:USART:1.3.0
       Include file:  Device\StdPeriph_Driver\inc\stm32f4xx_usart.h
       Source file:   Device\StdPeriph_Driver\src\stm32f4xx_usart.c
-Target not created.
 Build Time Elapsed:  00:00:01
 </pre>
 </body>

@@ -5,6 +5,9 @@ void set_uart()
 	USART_InitTypeDef USART_InitStruct;
 	GPIO_InitTypeDef GPIO_InitStructure;
 	
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
+	
 	/*UART3 <-> Wifi settings*/
 	/*PB10 = TX, PB11 = RX */
 	/*BaudRate 9600, 8bit word length, Stop bits =1, No parity*/

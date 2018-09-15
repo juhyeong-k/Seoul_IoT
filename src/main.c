@@ -60,7 +60,7 @@ int main(void){
 	set_adc();
 	set_uart();
 	
-	memset(temp_1, 0, 4800);
+	/*memset(temp_1, 0, 4800);
 	memset(temp_2, 0, 4800);
 	memset(temp_3, 0, 4800);
 	
@@ -75,7 +75,7 @@ int main(void){
 	LCD_ILI9341_DrawRectangle(99, 110, 221, 130, ILI9341_COLOR_WHITE);
 	
 	// OV7670 configuration
-	/*err = OV7670_init();
+	err = OV7670_init();
 	
 	if (err == true){
 		LCD_ILI9341_Puts(100, 165, "Failed", &LCD_Font_16x26, ILI9341_COLOR_RED, ILI9341_COLOR_BLACK);
@@ -85,7 +85,7 @@ int main(void){
 	}		
 	else{
 		LCD_ILI9341_Puts(100, 165, "Success", &LCD_Font_16x26, ILI9341_COLOR_WHITE, ILI9341_COLOR_BLACK);
-	}*/
+	}
 	
 	// LCD welcome page
 	LCD_ILI9341_Fill(ILI9341_COLOR_BLACK);
@@ -101,14 +101,22 @@ int main(void){
 	{
 		get_origin_yellow_line((uint16_t*) frame_buffer, temp_1, temp_2, temp_3, origin);
 	}
+	*/
 	while(1){
-			DCMI_CaptureCmd(ENABLE);
+			//DCMI_CaptureCmd(ENABLE);
 		  //get_yellow_line((uint16_t*) frame_buffer, current_frame);
 		
-			LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
+			//LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
 		
 		  //LCD_ILI9341_Display_bit_Image(origin);
-			LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
+			//LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
+		  USART_String_Send(USART3, "Hello\r\n");
+		  ADC_Cmd(ADC1, ENABLE);
+		  
+		  for(i=0; i < 150; i++)
+			{
+	  	  Delay(2147483640);
+			}
 	}
 }
 
