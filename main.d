@@ -29,4 +29,3 @@
 .\main.o: inc\lcd_spi.h
 .\main.o: inc\cv.h
 .\main.o: inc\OV7670_control.h
-.\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

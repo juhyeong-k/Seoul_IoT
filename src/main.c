@@ -29,6 +29,7 @@
 #include "lcd_fonts.h"
 #include "lcd_spi.h"
 #include "cv.h"
+#include "adc.h"
 #include <stdbool.h>
 #include <string.h>
 
