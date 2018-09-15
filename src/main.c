@@ -86,6 +86,12 @@ int main(void){
 	
 	// Increse SPI baudrate
 	LCD_SPI_BaudRateUp();
+	
+	// Init
+	DCMI_CaptureCmd(ENABLE);
+	LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
+	LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
+	
   get_originYellow((uint16_t*) frame_buffer, b1, b2, origin);
 	while(1){
 		// Yellow display

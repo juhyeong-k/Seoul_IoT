@@ -131,5 +131,4 @@ void get_originYellow(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t b1[IMG_ROWS*I
 		for(i = 0; i < ILI9341_PIXEL/16; i++)
 			origin[i] |= b1[i];
 	}
-	
 }
