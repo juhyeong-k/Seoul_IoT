@@ -30,6 +30,7 @@
 #include "cv.h"
 #include "adc.h"
 #include "uart.h"
+#include "gpio.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
@@ -37,6 +38,8 @@ static volatile uint8_t STM_mode = 0;
 static volatile bool btn_pressed = false;
 static volatile bool sett_mode = true;
 static volatile bool frame_flag = false;
+
+extern int Delay(int time);
 
 uint16_t b1[4800];
 uint16_t b2[4800];
@@ -46,6 +49,7 @@ int main(void){
 	bool err;
 	int i;
 	char camera_value[10];
+	char adc_value[10];
 	// System init
 	SystemInit();
 	STM_LedInit();
@@ -57,6 +61,7 @@ int main(void){
 	LCD_ILI9341_Init();
 	set_adc();
 	set_uart();
+	set_gpio();
 	
 	memset(origin, 0, 4800);
 	
@@ -110,9 +115,28 @@ int main(void){
 		LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
 		
 		memset(camera_value, 0, 10);
-		sprintf(camera_value,"%d",compare((uint16_t*) frame_buffer, b1, b2, origin));
-		USART_String_Send(USART2, camera_value);
+		memset(adc_value, 0, 10);
+		//sprintf(camera_value,"%d",compare((uint16_t*) frame_buffer, b1, b2, origin));
+		sprintf(adc_value,"%d",ADC_Read());
+		USART_String_Send(USART2, adc_value);
 		USART_String_Send(USART2, "\n\r");
+		
+		motionSend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1));
+		for(i=0; i < 100; i++) Delay(2147483640);
+		motionSend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1));
+		for(i=0; i < 100; i++) Delay(2147483640);
+		motionSend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1));
+		for(i=0; i < 100; i++) Delay(2147483640);
+		motionSend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1));
+		for(i=0; i < 100; i++) Delay(2147483640);
+		gassend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0));
+		for(i=0; i < 100; i++) Delay(2147483640);
+		gassend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0));
+		for(i=0; i < 100; i++) Delay(2147483640);
+		gassend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0));
+		for(i=0; i < 100; i++) Delay(2147483640);
+		gassend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0));
+		for(i=0; i < 100; i++) Delay(2147483640);
 	}
 }
 void TIM3_IRQHandler(void){

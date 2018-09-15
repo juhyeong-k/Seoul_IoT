@@ -12,7 +12,7 @@ void set_uart()
 	
 	/*UART3 <-> Wifi settings*/
 	/*PB10 = TX, PB11 = RX */
-	/*BaudRate 9600, 8bit word length, Stop bits =1, No parity*/
+	/*BaudRate 38400, 8bit word length, Stop bits =1, No parity*/
 	GPIO_PinAFConfig(GPIOB, GPIO_PinSource10, GPIO_AF_USART3);
 	GPIO_PinAFConfig(GPIOB, GPIO_PinSource11, GPIO_AF_USART3);
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
@@ -67,4 +67,95 @@ void USART_String_Send(USART_TypeDef* USARTx, char *str)
 			USART_SendData(USARTx, *str);
 			str++;
 		}
+}
+void USART_AT_String_Send(USART_TypeDef* USARTx, char *str) 
+{
+	while(*str != '\n')
+	{
+		 while(!(USART_GetFlagStatus(USARTx, USART_FLAG_TXE)));
+		 USART_SendData(USARTx, *str);
+		 str++;
+	}
+	while(!(USART_GetFlagStatus(USARTx, USART_FLAG_TXE)));
+		 USART_SendData(USARTx, '\r');
+	while(!(USART_GetFlagStatus(USARTx, USART_FLAG_TXE)));
+		 USART_SendData(USARTx, '\n');
+}
+void motionSend(uint8_t value)
+{
+   char str[31];
+   str[0] = 'A';
+   str[1] = 'T';
+   str[2] = '+';
+   str[3] = 'S';
+   str[4] = 'E';
+   str[5] = 'N';
+   str[6] = 'D';
+   str[7] = 'B';
+   str[8] = '=';
+   str[9] = '1';
+   str[10] = '0';
+   str[11] = ':';
+   str[12] = '0';
+   str[13] = '0';
+   str[14] = '0';
+   str[15] = '0';
+   str[16] = '0';
+   str[17] = '0';
+   str[18] = '0';
+   str[19] = '0';
+   str[20] = '0';
+   str[21] = '0';
+   str[22] = '0';
+   str[23] = '6';
+   str[24] = '1';
+   str[25] = '2';
+   str[26] = '0';
+   str[27] = '0';
+   str[28] = '0';
+   if(value == 1)
+      str[29] = '1';
+   else
+      str[29] = '0';
+   str[30] = '\n';
+   USART_AT_String_Send(USART3, str);
+}
+void gassend(uint8_t value)
+{
+   char str[31];
+   str[0] = 'A';
+   str[1] = 'T';
+   str[2] = '+';
+   str[3] = 'S';
+   str[4] = 'E';
+   str[5] = 'N';
+   str[6] = 'D';
+   str[7] = 'B';
+   str[8] = '=';
+   str[9] = '1';
+   str[10] = '5';
+   str[11] = ':';
+   str[12] = '0';
+   str[13] = '0';
+   str[14] = '0';
+   str[15] = '0';
+   str[16] = '0';
+   str[17] = '0';
+   str[18] = '0';
+   str[19] = '0';
+   str[20] = '0';
+   str[21] = '0';
+   str[22] = '1';
+   str[23] = '0';
+   str[24] = '1';
+   str[25] = '2';
+   str[26] = '0';
+   str[27] = '0';
+   str[28] = '0';
+   if(value == 1)
+      str[29] = '1';
+   else
+      str[29] = '0';
+   str[30] = '\n';
+   USART_AT_String_Send(USART3, str);
 }
