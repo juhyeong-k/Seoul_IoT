@@ -27,13 +27,10 @@ Project File Date:  09/14/2018
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'OptRec'
-compiling cv.c...
-src\cv.c(62): warning:  #177-D: variable "i"  was declared but never referenced
-  	uint32_t n, i;
-src\cv.c: 1 warning, 0 errors
+compiling main.c...
 linking...
-Program Size: Code=16808 RO-data=10964 RW-data=80 ZI-data=184032  
-".\OptRec.axf" - 0 Error(s), 1 Warning(s).
+Program Size: Code=17028 RO-data=10964 RW-data=80 ZI-data=193632  
+".\OptRec.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -69,12 +66,12 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.1.2
 
    * Component: Keil::Device:Startup:1.3.1
+      Source file:   Device\Source\ARM\STM32F4xx_OTP.s
+      Source file:   Device\Source\ARM\STM32F42xxx_43xxx_OPT.s
       Include file:  Device\Include\stm32f4xx.h
       Source file:   Device\Source\system_stm32f4xx.c
       Include file:  RTE_Driver\Config\RTE_Device.h
       Source file:   Device\Source\ARM\startup_stm32f429_439xx.s
-      Source file:   Device\Source\ARM\STM32F42xxx_43xxx_OPT.s
-      Source file:   Device\Source\ARM\STM32F4xx_OTP.s
 
    * Component: Keil::Device:StdPeriph Drivers:DCMI:1.3.0
       Include file:  Device\StdPeriph_Driver\inc\stm32f4xx_dcmi.h
@@ -85,9 +82,9 @@ Package Vendor: Keil
       Source file:   Device\StdPeriph_Driver\src\stm32f4xx_dma.c
 
    * Component: Keil::Device:StdPeriph Drivers:Framework:1.3.1
-      Source file:   Device\StdPeriph_Driver\templates\stm32f4xx_conf.h
-      Include file:  Device\StdPeriph_Driver\templates\stm32f4xx_it.h
       Source file:   Device\StdPeriph_Driver\src\misc.c
+      Include file:  Device\StdPeriph_Driver\templates\stm32f4xx_it.h
+      Source file:   Device\StdPeriph_Driver\templates\stm32f4xx_conf.h
       Source file:   Device\StdPeriph_Driver\templates\stm32f4xx_it.c
 
    * Component: Keil::Device:StdPeriph Drivers:GPIO:1.3.0
@@ -99,8 +96,8 @@ Package Vendor: Keil
       Source file:   Device\StdPeriph_Driver\src\stm32f4xx_i2c.c
 
    * Component: Keil::Device:StdPeriph Drivers:RCC:1.3.0
-      Source file:   Device\StdPeriph_Driver\src\stm32f4xx_rcc.c
       Include file:  Device\StdPeriph_Driver\inc\stm32f4xx_rcc.h
+      Source file:   Device\StdPeriph_Driver\src\stm32f4xx_rcc.c
 
    * Component: Keil::Device:StdPeriph Drivers:SPI:1.3.0
       Source file:   Device\StdPeriph_Driver\src\stm32f4xx_spi.c
