@@ -111,28 +111,10 @@ int main(void){
 		
 		memset(camera_value, 0, 10);
 		sprintf(camera_value,"%d",compare((uint16_t*) frame_buffer, b1, b2, origin));
-		USART_String_Send(USART3, camera_value);
-		USART_String_Send(USART3, "\n\r");
+		USART_String_Send(USART2, camera_value);
+		USART_String_Send(USART2, "\n\r");
 	}
 }
-/*
-	for(i=0; i < 10; i++)
-	{
-		DCMI_CaptureCmd(ENABLE);
-		get_origin_yellow_line((uint16_t*) frame_buffer, temp_1, temp_2, temp_3, origin);
-	}
-	DCMI_CaptureCmd(ENABLE);
-	//get_yellow_line((uint16_t*) frame_buffer, origin);
-
-	LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
-
-	LCD_ILI9341_Display_bit_Image(origin);
-	LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
-	memset(value,0,10);
-	sprintf(value, "%d", compare((uint16_t*) frame_buffer, temp_1, origin));
-	USART_String_Send(USART3, value);
-	USART_String_Send(USART3, "\n\r");
-*/
 void TIM3_IRQHandler(void){
 	if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET){		
 		static uint8_t old_state = 0xFF;

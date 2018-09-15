@@ -66,9 +66,9 @@ int compare(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t b1[IMG_ROWS*IMG_COLUMNS
 		b2[n] = origin[n];
 	
 	for(i = 0; i < 5; i++) {
-			DCMI_CaptureCmd(ENABLE);
-	    yellow_filter(src, b1);
-		
+	  DCMI_CaptureCmd(ENABLE);
+	  yellow_filter(src, b1);
+	
 		for(n = 0; n < ILI9341_PIXEL; n++) {
 			bit_shift(&bit);
 			if( (origin[n/16] & bit) && ( b1[n/16] & bit ) )
