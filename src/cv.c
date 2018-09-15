@@ -50,7 +50,7 @@ void get_yellow_line(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t des[IMG_ROWS*I
 				}
 				if(h<0) h = h+360;
 				h = h/2;
-				if( ( 25 < h && h < 95 ) && ( 65 < s && s < 255 ) && ( 10 < v && v < 255) )
+				if( ( 15 < h && h < 95 ) && ( 84 < s && s < 255 ) && ( 10 < v && v < 255) )
 						des[n/16] |= bit;
 				else des[n/16] &= ~bit;
 		 }

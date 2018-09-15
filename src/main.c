@@ -106,20 +106,13 @@ int main(void){
 	}
 	*/
 	while(1){
-			//DCMI_CaptureCmd(ENABLE);
-		  //get_yellow_line((uint16_t*) frame_buffer, current_frame);
+			DCMI_CaptureCmd(ENABLE);
+		  get_yellow_line((uint16_t*) frame_buffer, origin);
 		
-			//LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
+			LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
 		
-		  //LCD_ILI9341_Display_bit_Image(origin);
-			//LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
-		  USART_String_Send(USART3, "\r\nHello\r\n");
-		  sprintf(adc_value,"%d",ADC_Read());
-		  USART_String_Send(USART3, adc_value);
-		  for(i=0; i < 150; i++)
-			{
-	  	  Delay(2147483640);
-			}
+		  LCD_ILI9341_Display_bit_Image(origin);
+			LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
 	}
 }
 
