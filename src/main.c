@@ -31,6 +31,7 @@
 #include "cv.h"
 #include "adc.h"
 #include "uart.h"
+#include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
 
@@ -48,6 +49,8 @@ uint16_t origin[4800];
 int main(void){
 	bool err;
 	int i;
+	int adc;
+	char adc_value[10];
 	// System init
 	SystemInit();
 	STM_LedInit();
@@ -110,9 +113,9 @@ int main(void){
 		
 		  //LCD_ILI9341_Display_bit_Image(origin);
 			//LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
-		  USART_String_Send(USART3, "Hello\r\n");
-		  ADC_Cmd(ADC1, ENABLE);
-		  
+		  USART_String_Send(USART3, "\r\nHello\r\n");
+		  sprintf(adc_value,"%d",ADC_Read());
+		  USART_String_Send(USART3, adc_value);
 		  for(i=0; i < 150; i++)
 			{
 	  	  Delay(2147483640);
