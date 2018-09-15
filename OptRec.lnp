@@ -6,6 +6,8 @@
 ".\lcd_ili9341.o"
 ".\lcd_spi.o"
 ".\cv.o"
+".\adc.o"
+".\uart.o"
 ".\misc.o"
 ".\stm32f4xx_dcmi.o"
 ".\stm32f4xx_dma.o"
@@ -16,6 +18,8 @@
 ".\stm32f4xx_tim.o"
 ".\startup_stm32f429_439xx.o"
 ".\system_stm32f4xx.o"
+".\stm32f4xx_adc.o"
+".\stm32f4xx_usart.o"
 --ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\OptRec.map" -o .\OptRec.axf

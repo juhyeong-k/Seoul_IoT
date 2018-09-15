@@ -30,6 +30,7 @@
 #include "lcd_spi.h"
 #include "cv.h"
 #include "adc.h"
+#include "uart.h"
 #include <stdbool.h>
 #include <string.h>
 
@@ -56,6 +57,8 @@ int main(void){
 	SCCB_init();
 	DCMI_DMA_init();
 	LCD_ILI9341_Init();
+	set_adc();
+	set_uart();
 	
 	memset(temp_1, 0, 4800);
 	memset(temp_2, 0, 4800);
@@ -104,8 +107,8 @@ int main(void){
 		
 			LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
 		
-		  LCD_ILI9341_Display_bit_Image(origin);
-			//LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
+		  //LCD_ILI9341_Display_bit_Image(origin);
+			LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
 	}
 }
 

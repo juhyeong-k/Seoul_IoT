@@ -10,13 +10,15 @@
 .\ov7670_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include\system_stm32f4xx.h
 .\ov7670_control.o: .\RTE\Device\STM32F429ZI\stm32f4xx_conf.h
 .\ov7670_control.o: .\RTE\_OptRec\RTE_Components.h
-.\ov7670_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_dma.h
+.\ov7670_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_adc.h
 .\ov7670_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include\stm32f4xx.h
+.\ov7670_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_dma.h
 .\ov7670_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_gpio.h
 .\ov7670_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_i2c.h
 .\ov7670_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_rcc.h
 .\ov7670_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_spi.h
 .\ov7670_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_tim.h
+.\ov7670_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\ov7670_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\misc.h
 .\ov7670_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_dcmi.h
 .\ov7670_control.o: inc\lcd_ili9341.h
