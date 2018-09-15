@@ -65,7 +65,7 @@ int compare(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t b1[IMG_ROWS*IMG_COLUMNS
 	for(n = 0; n < ILI9341_PIXEL/16; n++)
 		b2[n] = origin[n];
 	
-	for(i = 0; i < 5; i++) {
+	for(i = 0; i < 30; i++) {
 	  DCMI_CaptureCmd(ENABLE);
 	  yellow_filter(src, b1);
 	

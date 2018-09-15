@@ -73,7 +73,7 @@ int main(void){
 	LCD_ILI9341_DrawRectangle(99, 110, 221, 130, ILI9341_COLOR_WHITE);
 	
 	// OV7670 configuration
-	if(0) {
+	if(1) {
 		err = OV7670_init();
 		if (err == true){
 			LCD_ILI9341_Puts(100, 165, "Failed", &LCD_Font_16x26, ILI9341_COLOR_RED, ILI9341_COLOR_BLACK);
@@ -116,27 +116,12 @@ int main(void){
 		
 		memset(camera_value, 0, 10);
 		memset(adc_value, 0, 10);
-		//sprintf(camera_value,"%d",compare((uint16_t*) frame_buffer, b1, b2, origin));
-		sprintf(adc_value,"%d",ADC_Read());
-		USART_String_Send(USART2, adc_value);
+		sprintf(camera_value,"%d",compare((uint16_t*) frame_buffer, b1, b2, origin));
+		//sprintf(adc_value,"%d",ADC_Read());
+		USART_String_Send(USART2, camera_value);
 		USART_String_Send(USART2, "\n\r");
 		
-		motionSend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1));
-		for(i=0; i < 100; i++) Delay(2147483640);
-		motionSend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1));
-		for(i=0; i < 100; i++) Delay(2147483640);
-		motionSend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1));
-		for(i=0; i < 100; i++) Delay(2147483640);
-		motionSend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1));
-		for(i=0; i < 100; i++) Delay(2147483640);
-		gassend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0));
-		for(i=0; i < 100; i++) Delay(2147483640);
-		gassend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0));
-		for(i=0; i < 100; i++) Delay(2147483640);
-		gassend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0));
-		for(i=0; i < 100; i++) Delay(2147483640);
-		gassend(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0));
-		for(i=0; i < 100; i++) Delay(2147483640);
+		LoRa_send(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1), GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0), ADC_Read());
 	}
 }
 void TIM3_IRQHandler(void){

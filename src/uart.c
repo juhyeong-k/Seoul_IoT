@@ -1,5 +1,7 @@
 #include "uart.h"
-
+#include <string.h>
+#include <stdio.h>
+extern int Delay(int time);
 void set_uart()
 {
 	USART_InitTypeDef USART_InitStruct;
@@ -158,4 +160,145 @@ void gassend(uint8_t value)
       str[29] = '0';
    str[30] = '\n';
    USART_AT_String_Send(USART3, str);
+}
+void adcSend(uint16_t value)
+{
+	char str[31];
+	int decimal = value;
+	int hexadecimal[50];
+	uint8_t i,j,k;
+	
+	memset(str,0,30);
+	memset(hexadecimal, 0, 50);
+	str[0] = 'A';
+	str[1] = 'T';
+	str[2] = '+';
+	str[3] = 'S';
+	str[4] = 'E';
+	str[5] = 'N';
+	str[6] = 'D';
+	str[7] = 'B';
+	str[8] = '=';
+	str[9] = '2';
+  str[10] = '0';
+  str[11] = ':';
+	str[12] = '0';
+	str[13] = '0';
+	str[14] = '0';
+	str[15] = '0';
+	str[16] = '0';
+	str[17] = '0';
+	str[18] = '0';
+	str[19] = '0';
+	str[20] = '0';
+	str[21] = '0';
+	str[22] = '1';
+	str[23] = '9';
+	str[24] = '1';
+	str[25] = '2';
+	
+	for(i=0; i<4; i++) {
+		if(decimal>15) {
+			k=decimal%16;
+			hexadecimal[i] = k;
+		}
+		else {
+			hexadecimal[i] = decimal;
+		}
+		decimal = decimal/16;
+	}
+	for(j=0; j < 4; j++) {
+		if(hexadecimal[3-j] >= 10)
+			sprintf(str+26+j,"%c",hexadecimal[3-j]+55);
+		else
+			sprintf(str+26+j,"%d",hexadecimal[3-j]);
+	}
+	str[30] = '\n';
+	USART_AT_String_Send(USART3, str);
+}
+void LoRa_send(uint8_t motion, uint8_t gas, uint16_t adc)
+{
+	char str[51];
+	
+	// for ADC
+	int decimal = adc;
+	int hexadecimal[50];
+	uint8_t i,j,k;
+	
+	memset(str,0,51);
+	
+	str[0] = 'A';
+	str[1] = 'T';
+	str[2] = '+';
+	str[3] = 'S';
+	str[4] = 'E';
+	str[5] = 'N';
+	str[6] = 'D';
+	str[7] = 'B';
+	str[8] = '=';
+	Delay(2147483640);
+	str[9] = '2';
+	str[10] = '0';
+	str[11] = ':';
+	str[12] = '0';
+	str[13] = '0';
+	str[14] = '0';
+	str[15] = '0';
+	str[16] = '0';
+	str[17] = '0';
+	str[18] = '0';
+	str[19] = '0';
+	str[20] = '0';
+	str[21] = '0';
+
+	// Motion
+	str[22] = '0';
+	str[23] = '6';
+	str[24] = '1';
+	str[25] = '2';
+	str[26] = '0';
+	str[27] = '0';
+	str[28] = '0';
+	if(motion == 1)
+		str[29] = '1';
+	else
+		str[29] = '0';
+
+	// Gas
+	str[30] = '1';
+	str[31] = '0';
+	str[32] = '1';
+	str[33] = '2';
+	if(gas == 1)
+		str[34] = '1';
+	else
+		str[34] = '0';
+	str[35] = '0';
+	str[36] = '0';
+	str[37] = '0';
+
+	// Adc
+	str[38] = '1';
+	str[39] = '9';
+	str[40] = '1';
+	str[41] = '2';
+	for(i=0; i<4; i++) {
+		if(decimal>15) {
+			k=decimal%16;
+			hexadecimal[i] = k;
+		}
+		else {
+			hexadecimal[i] = decimal;
+		}
+		decimal = decimal/16;
+	}
+	for(j=0; j < 4; j++) {
+		if(hexadecimal[3-j] >= 10)
+			sprintf(str+42+j,"%c",hexadecimal[3-j]+55);
+		else
+			sprintf(str+42+j,"%d",hexadecimal[3-j]);
+	}
+	
+	str[46] = '\n';
+	USART_AT_String_Send(USART3, str);
 }
