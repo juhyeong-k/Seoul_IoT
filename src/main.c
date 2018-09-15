@@ -21,7 +21,6 @@
 *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *	==========================================================================
 */
-
 #include "stm32f4xx.h"
 #include "system_control.h"
 #include "OV7670_control.h"
@@ -34,19 +33,15 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-
 static volatile uint8_t STM_mode = 0;
 static volatile bool btn_pressed = false;
 static volatile bool sett_mode = true;
 static volatile bool frame_flag = false;
 
-struct Buffer {
-	uint16_t b1[4800];
-	uint16_t b2[4800];
-	uint16_t b3[4800];
-	uint16_t origin[4800];
-};
-struct Buffer buffer;
+uint16_t b1[4800];
+uint16_t b2[4800];
+uint16_t origin[4800];
+
 int main(void){
 	bool err;
 	int i;
@@ -61,6 +56,8 @@ int main(void){
 	LCD_ILI9341_Init();
 	set_adc();
 	set_uart();
+	
+	memset(origin, 0, 4800);
 	
 	// LCD init page
   LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_2);
@@ -89,13 +86,20 @@ int main(void){
 	
 	// Increse SPI baudrate
 	LCD_SPI_BaudRateUp();
-
+  get_originYellow((uint16_t*) frame_buffer, b1, b2, origin);
 	while(1){
+		// Yellow display
 	  DCMI_CaptureCmd(ENABLE);
-		yellow_filter((uint16_t*) frame_buffer, buffer.b1);
-		
+		yellow_filter((uint16_t*) frame_buffer, b1);
 	  LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
-		LCD_ILI9341_Display_bit_Image(buffer.b1);
+		LCD_ILI9341_Display_bit_Image(b1);
+		
+		// Origin display
+	  LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
+		LCD_ILI9341_Display_bit_Image(origin);
+		
+		// RGB display
+	  LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
 		LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
 	}
 }
