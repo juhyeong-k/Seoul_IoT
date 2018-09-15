@@ -45,6 +45,7 @@ uint16_t origin[4800];
 int main(void){
 	bool err;
 	int i;
+	char camera_value[10];
 	// System init
 	SystemInit();
 	STM_LedInit();
@@ -105,8 +106,13 @@ int main(void){
 		LCD_ILI9341_Display_bit_Image(origin);
 		
 		// RGB display
-	  //LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
-		//LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
+	  LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
+		LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
+		
+		memset(camera_value, 0, 10);
+		sprintf(camera_value,"%d",compare((uint16_t*) frame_buffer, b1, b2, origin));
+		USART_String_Send(USART3, camera_value);
+		USART_String_Send(USART3, "\n\r");
 	}
 }
 /*
