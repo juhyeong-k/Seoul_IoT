@@ -117,8 +117,8 @@ void get_originYellow(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t b1[IMG_ROWS*I
 	DCMI_CaptureCmd(ENABLE);
 	yellow_filter(src, b1);
 	
-	for(i = 0; i < 3; i++) {
-		for(j = 0; j < 3; j++) {
+	for(i = 0; i < 5; i++) {
+		for(j = 0; j < 5; j++) {
 			DCMI_CaptureCmd(ENABLE);
 			yellow_filter(src, b2);
 			

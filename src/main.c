@@ -105,8 +105,8 @@ int main(void){
 		LCD_ILI9341_Display_bit_Image(origin);
 		
 		// RGB display
-	  LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
-		LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
+	  //LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
+		//LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
 	}
 }
 /*
