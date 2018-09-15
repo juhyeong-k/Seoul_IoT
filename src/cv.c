@@ -56,8 +56,58 @@ void yellow_filter(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t des[IMG_ROWS*IMG
 			else des[n/16] &= ~bit;
 	 }
 }
-int compare(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t temp_1[IMG_ROWS*IMG_COLUMNS/16], uint16_t origin[IMG_ROWS*IMG_COLUMNS/16])
+int compare(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t b1[IMG_ROWS*IMG_COLUMNS/16], uint16_t b2[IMG_ROWS*IMG_COLUMNS/16], uint16_t origin[IMG_ROWS*IMG_COLUMNS/16])
 {
+	int i,n;
+	uint16_t bit = 0;
+	uint32_t value = 0;
+	
+	for(n = 0; n < ILI9341_PIXEL/16; n++)
+		b2[n] = origin[n];
+	
+	for(i = 0; i < 5; i++) {
+		for(n = 0; n < ILI9341_PIXEL/16; n++) {
+			
+			bit_shift(&bit);
+			
+			DCMI_CaptureCmd(ENABLE);
+	    yellow_filter(src, b1);
+			if( (origin[n/16] & bit) && ( b1[n/16] & bit ) )
+				b2[n/16] &= ~bit;
+		}
+	}
+	bit = 0;
+	for(n = 0; n < ILI9341_PIXEL; n++) {
+		bit_shift(&bit);
+		if( b2[n/16] & bit ) value++;
+	}
+	return value;
+	/*
+	for(i = 0; i < 5; i++) {
+		for(j = 0; j < 5; j++) {
+			DCMI_CaptureCmd(ENABLE);
+			yellow_filter(src, b2);
+			
+			for(k = 0; k < ILI9341_PIXEL/16; k++) {
+				bit_shift(&bit);
+				if( !((b1[k/16] & bit) && (b2[k/16] & bit)) )
+				  b1[k/16] &= ~bit;
+			}
+		}
+		for(i = 0; i < ILI9341_PIXEL/16; i++)
+			origin[i] |= b1[i];
+	}
+	
+	
+	
+	
+	
+	
+	
+	yellow_filter(src, b1);
+	
+	
+	
 	int h,s,v;
 	uint16_t b,g,r;
 	uint32_t n,i,value;
@@ -108,6 +158,7 @@ int compare(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t temp_1[IMG_ROWS*IMG_COL
 		if( (origin[n/16] & bit) && !( temp_1[n/16] & bit ) ) value++;
 	}
 	return value;
+	*/
 }
 void get_originYellow(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t b1[IMG_ROWS*IMG_COLUMNS/16], uint16_t b2[IMG_ROWS*IMG_COLUMNS/16], uint16_t origin[IMG_ROWS*IMG_COLUMNS/16])
 {
