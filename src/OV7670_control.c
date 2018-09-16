@@ -40,7 +40,7 @@
 volatile uint16_t frame_buffer[IMG_ROWS*IMG_COLUMNS];
 
 const uint8_t OV7670_reg [OV7670_REG_NUM][2] = {				
-	{0x12, 0x80},		//Reset registers
+	//{0x12, 0x80},		//Reset registers
 	
 	// Image format
 	{0x12, 0x14},		//QVGA size, RGB mode
@@ -55,7 +55,7 @@ const uint8_t OV7670_reg [OV7670_REG_NUM][2] = {
 	{0x03, 0x0a},		//VREF
 	{0x19, 0x02},		//VSTART
 	{0x1a, 0x7a},		//VSTOP
-	
+	/*
 	// Scalling numbers
 	{0x70, 0x3a},		//X_SCALING
 	{0x71, 0x35},		//Y_SCALING
@@ -126,6 +126,7 @@ const uint8_t OV7670_reg [OV7670_REG_NUM][2] = {
 	{0x9a, 0x00},		{0xb1, 0x0c},
 	{0xb2, 0x0e},		{0xb3, 0x82},
 	{0x4b, 0x01},
+	*/
 };
 
 void Delay(volatile uint16_t nCount){

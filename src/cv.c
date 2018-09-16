@@ -56,32 +56,6 @@ void yellow_filter(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t des[IMG_ROWS*IMG
 			else des[n/16] &= ~bit;
 	 }
 }
-int compare(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t b1[IMG_ROWS*IMG_COLUMNS/16], uint16_t b2[IMG_ROWS*IMG_COLUMNS/16], uint16_t origin[IMG_ROWS*IMG_COLUMNS/16])
-{
-	int i,n;
-	uint16_t bit = 0;
-	uint32_t value = 0;
-	
-	for(n = 0; n < ILI9341_PIXEL/16; n++)
-		b2[n] = origin[n];
-	
-	for(i = 0; i < 30; i++) {
-	  DCMI_CaptureCmd(ENABLE);
-	  yellow_filter(src, b1);
-	
-		for(n = 0; n < ILI9341_PIXEL; n++) {
-			bit_shift(&bit);
-			if( (origin[n/16] & bit) && ( b1[n/16] & bit ) )
-				b2[n/16] &= ~bit;
-		}
-	}
-	bit = 0;
-	for(n = 0; n < ILI9341_PIXEL; n++) {
-		bit_shift(&bit);
-		if( b2[n/16] & bit ) value++;
-	}
-	return value;
-}
 void get_originYellow(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t b1[IMG_ROWS*IMG_COLUMNS/16], uint16_t b2[IMG_ROWS*IMG_COLUMNS/16], uint16_t origin[IMG_ROWS*IMG_COLUMNS/16])
 {
 	uint32_t i,j,k;
@@ -90,8 +64,8 @@ void get_originYellow(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t b1[IMG_ROWS*I
 	DCMI_CaptureCmd(ENABLE);
 	yellow_filter(src, b1);
 	
-	for(i = 0; i < 5; i++) {
-		for(j = 0; j < 5; j++) {
+	for(i = 0; i < 10; i++) {
+		for(j = 0; j < 1; j++) {
 			DCMI_CaptureCmd(ENABLE);
 			yellow_filter(src, b2);
 			

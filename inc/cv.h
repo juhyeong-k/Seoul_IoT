@@ -1,8 +1,8 @@
 #include "OV7670_control.h"
 #include <stdint.h>
 
-#define H_min 25
-#define H_max 75
+#define H_min 10
+#define H_max 85
 #define S_min 25
 #define S_max 255
 #define V_min 10

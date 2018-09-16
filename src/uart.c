@@ -216,7 +216,7 @@ void adcSend(uint16_t value)
    str[30] = '\n';
    USART_AT_String_Send(USART3, str);
 }
-void LoRa_send(uint8_t motion, uint8_t gas, uint16_t adc, uint32_t cv)
+void LoRa_send(uint8_t motion, uint8_t gas, uint16_t adc)
 {
    char str[60];
    
@@ -293,16 +293,18 @@ void LoRa_send(uint8_t motion, uint8_t gas, uint16_t adc, uint32_t cv)
    }
    for(j=0; j < 6; j++) {
       if(hexadecimal[5-j] >= 10)
-         sprintf(str+42+j,"%c",hexadecimal[5-j]+55);
+         sprintf(str+40+j,"%c",hexadecimal[5-j]+55);
       else
-         sprintf(str+42+j,"%d",hexadecimal[5-j]);
+         sprintf(str+40+j,"%d",hexadecimal[5-j]);
    }
-   str[40] = '\n';
-   USART_AT_String_Send(USART3, str);
-   
-   Delay(2147483640);
-   Delay(2147483640);
-   // CV
+   str[46] = '\n';
+   USART_AT_String_Send(USART3, str);   
+}
+void LoRa_cv_send(uint32_t cv)
+{
+   char str[35];
+   memset(str,0,35);
+	// CV
    str[0] = 'A';
    str[1] = 'T';
    str[2] = '+';

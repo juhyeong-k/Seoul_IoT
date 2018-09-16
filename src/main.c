@@ -44,7 +44,67 @@ extern int Delay(int time);
 uint16_t b1[4800];
 uint16_t b2[4800];
 uint16_t origin[4800];
-
+int compare(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t b1[IMG_ROWS*IMG_COLUMNS/16], uint16_t b2[IMG_ROWS*IMG_COLUMNS/16], uint16_t origin[IMG_ROWS*IMG_COLUMNS/16])
+{
+	char camera_value[10];
+	char adc_value[10];
+	uint32_t camera;
+	uint16_t adc;
+	uint8_t motion, gas;
+	int i,n;
+	uint16_t bit = 0;
+	uint32_t value = 0;
+	
+	for(n = 0; n < ILI9341_PIXEL/16; n++)
+		b2[n] = origin[n];
+	
+	for(i = 0; i < 30; i++) {
+	  DCMI_CaptureCmd(ENABLE);
+	  yellow_filter(src, b1);
+	
+		for(n = 0; n < ILI9341_PIXEL; n++) {
+			bit_shift(&bit);
+			if( (origin[n/16] & bit) && ( b1[n/16] & bit ) )
+				b2[n/16] &= ~bit;
+		}
+	}
+	adc = ADC_Read();
+	sprintf(adc_value,"%d",adc);
+	motion = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1);
+	gas = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0);
+	LoRa_send(motion, gas, adc);
+	for(i = 0; i < 30; i++) {
+	  DCMI_CaptureCmd(ENABLE);
+	  yellow_filter(src, b1);
+	
+		for(n = 0; n < ILI9341_PIXEL; n++) {
+			bit_shift(&bit);
+			if( (origin[n/16] & bit) && ( b1[n/16] & bit ) )
+				b2[n/16] &= ~bit;
+		}
+	}
+	adc = ADC_Read();
+	sprintf(adc_value,"%d",adc);
+	motion = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1);
+	gas = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0);
+	LoRa_send(motion, gas, adc);
+	for(i = 0; i < 30; i++) {
+	  DCMI_CaptureCmd(ENABLE);
+	  yellow_filter(src, b1);
+	
+		for(n = 0; n < ILI9341_PIXEL; n++) {
+			bit_shift(&bit);
+			if( (origin[n/16] & bit) && ( b1[n/16] & bit ) )
+				b2[n/16] &= ~bit;
+		}
+	}
+	bit = 0;
+	for(n = 0; n < ILI9341_PIXEL; n++) {
+		bit_shift(&bit);
+		if( b2[n/16] & bit ) value++;
+	}
+	return value;
+}
 int main(void){
 	bool err;
 	int i;
@@ -77,7 +137,7 @@ int main(void){
 	LCD_ILI9341_DrawRectangle(99, 110, 221, 130, ILI9341_COLOR_WHITE);
 	
 	// OV7670 configuration
-	if(1) {
+	if(0) {
 		err = OV7670_init();
 		if (err == true){
 			LCD_ILI9341_Puts(100, 165, "Failed", &LCD_Font_16x26, ILI9341_COLOR_RED, ILI9341_COLOR_BLACK);
@@ -105,31 +165,32 @@ int main(void){
   get_originYellow((uint16_t*) frame_buffer, b1, b2, origin);
 	while(1){
 		// Yellow display
-	  DCMI_CaptureCmd(ENABLE);
-		yellow_filter((uint16_t*) frame_buffer, b1);
-	  LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
-		LCD_ILI9341_Display_bit_Image(b1);
+	  //DCMI_CaptureCmd(ENABLE);
+		//yellow_filter((uint16_t*) frame_buffer, b1);
+	  //LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
+		//LCD_ILI9341_Display_bit_Image(b1);
 		
 		// Origin display
 	  LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
 		LCD_ILI9341_Display_bit_Image(origin);
 		
 		// RGB display
-	  LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
-		LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
+	  //LCD_ILI9341_Rotate(LCD_ILI9341_Orientation_Landscape_1);
+	  //LCD_ILI9341_DisplayImage((uint16_t*) frame_buffer);
 		
 		memset(camera_value, 0, 10);
 		memset(adc_value, 0, 10);
 		
 		// Sensing
-		camera = compare((uint16_t*) frame_buffer, b1, b2, origin);
+		//camera = compare((uint16_t*) frame_buffer, b1, b2, origin);
+		//LoRa_cv_send(camera);
 		sprintf(camera_value,"%d", camera);
 		adc = ADC_Read();
 		sprintf(adc_value,"%d",adc);
 		motion = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1);
 		gas = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0);
 		
-		LoRa_send(motion, gas, adc, camera);
+		LoRa_send(motion, gas, adc);
 		
 		USART_String_Send(USART2, "\n\r*** System info ***\n\r");
 		USART_String_Send(USART2, "camera : ");

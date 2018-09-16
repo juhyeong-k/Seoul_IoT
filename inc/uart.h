@@ -9,4 +9,5 @@ void USART_AT_String_Send(USART_TypeDef* USARTx, char *str);
 void motionSend(uint8_t value);
 void gassend(uint8_t value);
 void adcSend(uint16_t value);
-void LoRa_send(uint8_t motion, uint8_t gas, uint16_t adc, uint32_t cv);
+void LoRa_send(uint8_t motion, uint8_t gas, uint16_t adc);
+void LoRa_cv_send(uint32_t cv);
