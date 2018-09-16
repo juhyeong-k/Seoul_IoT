@@ -50,6 +50,10 @@ int main(void){
 	int i;
 	char camera_value[10];
 	char adc_value[10];
+	uint32_t camera;
+	uint16_t adc;
+	uint8_t motion, gas;
+	
 	// System init
 	SystemInit();
 	STM_LedInit();
@@ -116,12 +120,28 @@ int main(void){
 		
 		memset(camera_value, 0, 10);
 		memset(adc_value, 0, 10);
-		sprintf(camera_value,"%d",compare((uint16_t*) frame_buffer, b1, b2, origin));
-		//sprintf(adc_value,"%d",ADC_Read());
-		USART_String_Send(USART2, camera_value);
-		USART_String_Send(USART2, "\n\r");
 		
-		LoRa_send(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1), GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0), ADC_Read());
+		// Sensing
+		camera = compare((uint16_t*) frame_buffer, b1, b2, origin);
+		sprintf(camera_value,"%d", camera);
+		adc = ADC_Read();
+		sprintf(adc_value,"%d",adc);
+		motion = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1);
+		gas = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0);
+		
+		LoRa_send(motion, gas, adc, camera);
+		
+		USART_String_Send(USART2, "\n\r*** System info ***\n\r");
+		USART_String_Send(USART2, "camera : ");
+		USART_String_Send(USART2, camera_value);
+		USART_String_Send(USART2, "\n\r adc : ");
+		USART_String_Send(USART2, adc_value);
+		USART_String_Send(USART2, "\n\r");
+		if(motion) USART_String_Send(USART2, "motion detected\n\r");
+		else USART_String_Send(USART2, "motion not detected\n\r");
+		if(gas) USART_String_Send(USART2, "gas detected\n\r");
+		else USART_String_Send(USART2, "gas not detected\n\r");
+		USART_String_Send(USART2, "\n\r");
 	}
 }
 void TIM3_IRQHandler(void){

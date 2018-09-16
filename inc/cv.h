@@ -7,6 +7,7 @@
 #define S_max 255
 #define V_min 10
 #define V_max 255
+#define camera_threshould 1000
 
 void bit_shift(uint16_t* bit_origin);
 void yellow_filter(uint16_t src[IMG_ROWS*IMG_COLUMNS], uint16_t des[IMG_ROWS*IMG_COLUMNS/16]);

@@ -21,5 +21,13 @@
 .\uart.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\uart.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\misc.h
 .\uart.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_dcmi.h
+.\uart.o: inc\cv.h
+.\uart.o: inc\OV7670_control.h
+.\uart.o: inc\lcd_ili9341.h
+.\uart.o: inc\lcd_spi.h
+.\uart.o: inc\lcd_fonts.h
+.\uart.o: inc\OV7670_control.h
+.\uart.o: inc\lcd_ili9341.h
+.\uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

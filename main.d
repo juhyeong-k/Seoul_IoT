@@ -33,6 +33,8 @@
 .\main.o: inc\OV7670_control.h
 .\main.o: inc\adc.h
 .\main.o: inc\uart.h
+.\main.o: inc\cv.h
+.\main.o: inc\OV7670_control.h
 .\main.o: inc\gpio.h
 .\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
